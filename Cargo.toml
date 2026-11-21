@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/hb-profiler",
+]
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+rust-version = "1.85"
+version = "0.1.0"
