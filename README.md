@@ -16,6 +16,8 @@ The goal is to measure real bottlenecks first, then implement safe, evidence-bas
 
 Early development. The first milestone is a small, dependency-free Rust profiling core for frame-time statistics. It does not hook into the game or change rendering yet.
 
+`hb-profiler` keeps a bounded window of frame times with O(1) recording and reports average FPS, p50/p95/p99 frame time, the slowest frame and the 1% low FPS. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how Horizon and Starling are structured and where Horizon Boost could integrate.
+
 ## Planned components
 
 | Component | Responsibility | Status |
@@ -40,8 +42,12 @@ A very high render-loop counter is not automatically equivalent to useful, displ
 This repository is a Rust Cargo workspace. The first crate has no third-party dependencies.
 
 ```sh
+cargo fmt --all -- --check
 cargo test --workspace
+cargo run --release -p hb-profiler --example record_cost
 ```
+
+`record_cost` times `FrameWindow::record` on a full window. Results depend on the machine, so compare runs on the same hardware only.
 
 ## Compatibility
 
